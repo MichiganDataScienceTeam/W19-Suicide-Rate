@@ -7,4 +7,5 @@ https://github.com/Kunena/Kunena-Forum/wiki/Create-a-new-branch-with-git-and-man
 
 Note:
  $ git push origin <your_branch_name>   # use this command to push to your branch
-
+ $ git pull origin <your_branch_name>   # use this command to pull to your branch
+ $ git checkout master                  # use this command to navigate out of your branch and back to the master

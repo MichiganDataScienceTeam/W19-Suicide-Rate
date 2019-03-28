@@ -13,26 +13,24 @@ import matplotlib.pyplot as plt
 import pylab
 import csv
 import os
-
+import io
 from google.colab import files
 
 
-import io
+df1 = pd.read_csv("joinedkaggledata.csv") #reading in original dataset into df1
+df2 = pd.read_csv("all.csv") #reading in regional dataset into df2
 
-df1 = pd.read_csv("joinedkaggledata.csv")
-df2 = pd.read_csv("all.csv")
-
-#initialize the new regional columns to be added
+#initialize the new regional columns to be added to df1
 df1['region'] = 'N/A'
 df1['sub-region'] = 'N/A'
 
-#rename all.csv's 'name' column to 'country' 
+#rename all.csv's 'name' column to 'country' to match df1
 df2.rename(columns={'name':'country'}, inplace=True)
 
 #merge columns on country
 mergedStuff = pd.merge(df1, df2, on=['country'], how='inner')
 
-#dropping uneeded/unusable columns: only a few entries have intermideate region values
+#dropping uneeded/unusable columns: Ex)only a few entries have intermideate region values, 'country-year' is redundant when we have 'country' and 'year'
 mergedStuff.drop(columns = ['alpha-2','alpha-3','country-code', 'iso_3166-2', 'region_x', 'sub-region_x', 'intermediate-region'], inplace = True)
 
 mergedStuff.to_csv('merged.csv')
